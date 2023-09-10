@@ -1,0 +1,4 @@
+wget  --no-check-certificate https://ftp.ncbi.nlm.nih.gov/genomes/archive/old_refseq/Bacteria/Escherichia_coli_K_12_substr__MG1655_uid57779/NC_000913.faa
+grep -c '^>' NC_000913.faa
+grep -v '^>' NC_000913.faa | tr -d '\n' | wc -c
+awk '{ if (substr($1, 1, 1) == ">") { sequences++ } else { total_length += length($0) } } END { printf "Average length: %.2f\n", total_length/sequences }' NC_000913.faa
